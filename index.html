@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Baby!</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+/* ---------- GENERAL RESET ---------- */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Poppins', sans-serif;
+  overflow-x:hidden;
+  scroll-behavior:smooth;
+  background:#FEFBEA;
+}
+
+/* ---------- FLOATING EMOJIS ---------- */
+.background-elements{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:0;
+}
+
+.floating-item{
+  position:absolute;
+  animation:floatUp 12s linear infinite;
+  opacity:0.7;
+}
+
+@keyframes floatUp{
+  0%{transform:translateY(100vh) rotate(0deg);opacity:0;}
+  10%{opacity:0.8;}
+  90%{opacity:0.8;}
+  100%{transform:translateY(-10vh) rotate(360deg);opacity:0;}
+}
+
+/* ---------- HERO SECTION ---------- */
+.hero{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  position:relative;
+  z-index:1;
+  padding: 0 20px;
+}
+
+/* TYPEWRITER HEADING STYLES */
+.title-container {
+    display: inline-block;
+    min-height: 4.5rem; /* Prevents jumping */
+}
+
+#typewriter-h1{
+  font-family:'Dancing Script', cursive;
+  font-size:4rem;
+  color:#5D2E2E;
+  display: inline;
+}
+
+/* Blinking cursor next to H1 */
+.cursor{
+  display:inline-block;
+  width:5px;
+  height:3.5rem;
+  background:#FF4D6D;
+  margin-left:5px;
+  animation:blink 0.8s infinite;
+  vertical-align: middle;
+}
+
+@keyframes blink{
+  0%{opacity:1;}
+  50%{opacity:0;}
+  100%{opacity:1;}
+}
+
+/* FADE IN TEXT BELOW */
+#fade-text {
+    font-size: 1.2rem;
+    color: #555;
+    margin: 20px 0;
+    opacity: 0; /* Hidden initially */
+    transition: opacity 2s ease-in;
+    max-width: 600px;
+}
+
+.visible {
+    opacity: 1 !important;
+}
+
+/* Button */
+.btn-celebrate{
+  background:#FF4D6D;
+  color:white;
+  border:none;
+  padding:15px 35px;
+  border-radius:50px;
+  font-size:1.1rem;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 4px 15px rgba(255,77,109,0.4);
+  transition:transform 0.3s ease;
+  margin-top: 10px;
+}
+
+.btn-celebrate:hover{
+  transform:scale(1.05);
+}
+
+/* ---------- GALLERY SECTION ---------- */
+.gallery-section{
+  min-height:100vh;
+  padding:60px 20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  position:relative;
+  z-index:1;
+}
+
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  grid-template-rows:repeat(2,300px);
+  /* INCREASED GAP AS REQUESTED */
+  gap: 30px; 
+  max-width:1200px;
+  width:100%;
+  margin-top:40px;
+}
+
+/* Image card */
+.photo-card{
+  position:relative;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 10px 20px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+.photo-card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition: transform 0.5s ease;
+}
+
+.photo-card:hover img {
+    transform: scale(1.1);
+}
+
+/* HOVER OVERLAY - BOTTOM ONLY */
+.overlay{
+  position:absolute;
+  bottom:0; /* Positions at the bottom */
+  left:0;
+  width:100%;
+  padding:15px;
+  background:linear-gradient(to top, rgba(0,0,0,0.8), transparent); /* Nice gradient */
+  color:white;
+  text-align:center;
+  font-size:1.1rem;
+  
+  /* Animation properties */
+  transform: translateY(100%); /* Pushes it down initially */
+  opacity: 0;
+  transition: all 0.4s ease-in-out;
+}
+
+.photo-card:hover .overlay{
+  transform: translateY(0); /* Slides up */
+  opacity: 1;
+}
+
+/* ---------- MESSAGE SECTION ---------- */
+.message-section{
+  min-height:100vh;
+  background:linear-gradient(135deg,#667eea,#764ba2);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.message-card{
+  background:rgba(255,255,255,0.25);
+  backdrop-filter:blur(10px);
+  padding:50px;
+  border-radius:30px;
+  max-width:700px;
+  text-align:center;
+  color:white;
+  box-shadow:0 15px 35px rgba(0,0,0,0.2);
+}
+
+.message-card h2{
+  font-family:'Dancing Script', cursive;
+  font-size:3rem;
+  margin-bottom:20px;
+}
+
+/* Responsive */
+@media(max-width:1000px){
+  .gallery-grid{
+   grid-template-columns:repeat(2, 1fr); /* 2x4 on tablets */
+   gap: 20px;
+  }
+}
+
+@media(max-width:600px){
+  .hero h1{font-size:2.5rem;}
+  .cursor{height: 2rem;}
+  .gallery-grid{
+   grid-template-columns:1fr; /* Stack on phone */
+   grid-template-rows:auto;
+  }
+  .photo-card{ height: 300px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background-elements" id="background-elements"></div>
+
+<audio id="bgMusic" loop>
+  <source src="aud.mp3" type="audio/mpeg">
+</audio>
+
+<section class="hero">
+  <div class="title-container">
+     <h1 id="typewriter-h1"></h1><span class="cursor" id="cursor"></span>
+  </div>
+
+  <p id="fade-text">
+    Today is all about celebrating you and the joy you bring to my life.
+  </p>
+
+  <button class="btn-celebrate" onclick="startCelebration()">
+   Start the Celebration 🪄
+  </button>
+</section>
+
+<section class="gallery-section" id="gallery">
+  <h2 style="color:#5D2E2E;font-size:3rem;">Our Beautiful Memories</h2>
+
+  <div class="gallery-grid">
+
+   <div class="photo-card">
+    <img src="1.jpeg">
+    <div class="overlay">You are my favorite part of every day ❤️</div>
+   </div>
+
+   <div class="photo-card">
+    <img src="2.jpeg">
+    <div class="overlay">Lucky to call you mine 👑</div>
+   </div>
+
+   <div class="photo-card">
+    <img src="3.jpeg">
+    <div class="overlay">with you everything feels right ✨</div>
+   </div>
+
+   <div class="photo-card">
+    <img src="4.jpeg">
+    <div class="overlay">You matter to me — more than I say 😻</div>
+   </div>
+
+   <div class="photo-card">
+    <img src="5.jpeg">
+    <div class="overlay">There’s something undeniably special about you 💝</div>
+   </div>
+
+   <div class="photo-card">
+    <img src="6.jpeg">
+    <div class="overlay">Love always 💖</div>
+   </div>
+
+   <div class="photo-card">
+    <img src="7.jpeg">
+    <div class="overlay">You are magic 🦋</div>
+   </div>
+
+   <div class="photo-card">
+    <img src="8.jpeg">
+    <div class="overlay">My favorite person 😍</div>
+   </div>
+
+  </div>
+</section>
+
+<section class="message-section">
+  <div class="message-card">
+   <h2>A Special Message for You</h2>
+
+   <p>
+    Happy Birthday to the most beautiful soul in my life.
+    You make my world brighter just by being in it.
+   </p>
+
+   <p>
+    With you, every moment becomes special and meaningful.
+    I’m grateful every day that I get to call you mine.
+   </p>
+
+   <p style="color:#ffe66d;font-weight:bold;margin-top:20px;">
+    Happy Birthday, my love. Forever and always.
+   </p>
+
+   <div style="font-size:1.5rem;margin-top:20px;">
+    💖 💕 😍
+   </div>
+  </div>
+</section>
+
+<script>
+// ---------- 1. REFINED FLOATING EMOJIS ----------
+const bgContainer = document.getElementById("background-elements");
+const emojis = ["❤️","💖","💕","😍","🦋","🌸","✨"];
+
+function createFloatingElement(){
+  const el = document.createElement("div");
+  el.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+  el.className="floating-item";
+  el.style.left = Math.random()*100+"vw";
+  el.style.fontSize = (Math.random()*20+15)+"px";
+  el.style.animationDuration = (Math.random()*7+7)+"s";
+
+  bgContainer.appendChild(el);
+
+  setTimeout(()=>el.remove(),15000);
+}
+
+setInterval(createFloatingElement,400);
+
+// ---------- 2. TYPEWRITER FOR H1 + FADE IN FOR P ----------
+const titleText = "Happy Birthday, Baby!";
+const h1Element = document.getElementById("typewriter-h1");
+const fadeTextElement = document.getElementById("fade-text");
+const cursorElement = document.getElementById("cursor");
+let charIndex = 0;
+
+function typeWriterHeading(){
+  if(charIndex < titleText.length){
+    h1Element.innerHTML += titleText.charAt(charIndex);
+    charIndex++;
+    setTimeout(typeWriterHeading, 100); // Speed of typing
+  } else {
+    // Typing finished: Remove cursor and Trigger Fade In
+    cursorElement.style.display = 'none';
+    fadeTextElement.classList.add('visible');
+  }
+}
+
+// Start animation when page loads
+window.onload = function() {
+    setTimeout(typeWriterHeading, 500);
+};
+
+// ---------- 3. BUTTON: SCROLL + MUSIC ----------
+function startCelebration(){
+  const music = document.getElementById("bgMusic");
+  music.volume = 0.5;
+  music.play().catch(e => console.log("Audio play failed (user interaction needed first)"));
+  
+  document.getElementById("gallery")
+    .scrollIntoView({behavior:"smooth"});
+}
+</script>
+
+</body>
+</html>
